@@ -227,85 +227,20 @@ Go to your project [APIs dashboard](https://console.cloud.google.com/apis/dashbo
 - Compute Engine is now enabled on your project
 
 
+
 ## Virtual Machine (VM)
 
-**👌 Note: Skip to the next section if you already have a VM set up**
+_Note: The VM setup requires a [Google Cloud Platform](https://cloud.google.com/) account associated with an active [Billing account](https://console.cloud.google.com/billing)_
 
-_Note: The following section requires you already have a [Google Cloud Platform](https://cloud.google.com/) account associated with an active [Billing account](https://console.cloud.google.com/billing)._
+ℹ️ In the guide, left click to drag the screenshots if necessary
 
-- Go to console.cloud.google.com > > Compute Engine > VM instances > Create instance
-- Name it `lewagon-data-eng-vm-<github_username>`, replace `<github_username>` with your own, e.g. `krokrob`
-- Region `europe-west1`, choose the closest one among the [available regions](https://cloud.google.com/compute/docs/regions-zones#available)
+ℹ️ You may adjust the aspect ratio of your browser window to see the full screenshots
 
-    <img alt="gcloud-console-vm-create-instance" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-create-instance.png" width=500>
-- In the section `Machine configuration` under the sub-heading `Machine type`
-- Select General purpose > PRESET > e2-standard-4
+<a href="https://scribehow.com/embed/Create_a_Google_Cloud_VM_Instance_with_SSH_Key__1ohFlAbSR9yoG28S0PDfwg">
+  <img src="https://github.com/lewagon/data-engineering-setup/blob/main/images/scribe_gcp_vm.png" alt="scribe gcp vm" width="500">
+</a>
 
-    <img alt="gcloud-console-vm-e2-standard4" src="https://wagon-public-assets.s3.eu-west-3.amazonaws.com/v9dv42llst8qjp2uj0d1yr00po1g" width=500>
-- Boot disk > Change
-  - Operating system > Ubuntu
-  - Version > Ubuntu 22.04 LTS x86/64
-  - Boot disk type > Balanced persistent disk
-  - Size > upgrade to 150GB
-
-    <img alt="gcloud-console-vm-ubunt" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-ubunt.png" width=500>
-- Open `Networking, Disks, ...` under `Advanced options`
-- Open `Networking`
-
-    <img alt="gcloud-console-vm-networking" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-networking.png" width=500>
-- Go to `Network interfaces` and click on `default default (...)` with a downward arrow on the right.
-
-    <img alt="gcloud-console-vm-network-interfaces" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-network-interfaces.png" width=500>
-- This opened a box `Edit network interface`
-- Go to the dropdown `External IPv4 address`, click on it, click on `RESERVE STATIC EXTERNAL IP ADDRESS`
-
-    <img alt="gcloud-console-vm-create-static-ip" src="https://wagon-public-assets.s3.eu-west-3.amazonaws.com/1ax09j2zld7x0lsvpp9p8ld8u5vc" width=300>
-- Give it a name, like "lewagon-data-eng-vm-ip-<github_username>" (replace `<github_username>` with your own) and description "Le Wagon - Data Engineering VM IP". This will take a few seconds.
-
-    <img alt="gcloud-console-reserve-static-ip" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-reserve-static-ip.png" width=300>
-
-- You will now have a public IP associated with your account, and later to your VM instance. Click on `Done` at the bottom of the section `Edit network interface` you were in.
-
-    <img alt="gcloud-console-new-external-ip" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-new-external-ip.png" width=300>
-
-### Public SSH key
-- Open the `Security` section
-
-    <img alt="gcloud-console-vm-security" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-security.png" width=300>
-- Open the `Manage access` subsection
-
-    <img alt="gcloud-console-manage-access" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-manage-access.png" width=200>
-- Go to `Add manually generated SSH keys` and click `Add item`
-
-    <img alt="gcloud-console-add-manual-ssh-key" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-add-manual-ssh-key.png" width=500>
-- In your terminal display your public SSH key:
-    - Windows: navigate to where you created your SSH key and open `id_ed25519.pub`
-
-    - Mac/Linux users can use:
-        ```bash
-        cat ~/.ssh/id_ed25519.pub
-        # OR cat ~/.ssh/de-bootcamp.pub if you created a unique key
-        ```
-- Copy your public SSH key and paste it:
-
-    <img alt="gcloud-console-add-ssh-key-pub" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-add-ssh-key-pub.png" width=500>
-- On the right hand side you should see
-
-    <img alt="gcloud-console-vm-price-month" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-price-month.png" width=300>
-- You should be good to go and click `CREATE` at the bottom
-
-    <img alt="gcloud-console-vm-create" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-create.png" width=500>
-- It will take a few minutes for your virtual machine (VM) to be created. Your instance will show up like below when ready, with a green circled tick, named `lewagon-data-eng-vm-krokrob` (`krokrob` being replaced by your GitHub username).
-
-    <img alt="gcloud-console-vm-instance-running" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-instance-running.png" width=500>
-- Click on your instance
-
-    <img alt="gcloud-console-vm-running" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-running.png" width=500>
-- Go down to the section `SSH keys`, and write down your username (you need it for the next section)
-
-    <img alt="gcloud-console-vm-username" src="https://wagon-public-datasets.s3.amazonaws.com/data-engineering/setup/gcloud-console-vm-username.png" width=300>
-
-Congrats, your virtual machine is up and running, it is time to connect it with VS Code!
+**👌 Follow [this guide](https://scribehow.com/embed/Create_a_Google_Cloud_VM_Instance_with_SSH_Key__1ohFlAbSR9yoG28S0PDfwg) or skip to the next section if you already have a VM set up**
 
 
 ## Visual Studio Code
@@ -429,6 +364,36 @@ Here is a list of the extensions you are installing:
 
 ## Command line tools
 
+### Check the locale
+
+The locale is a mechanism allowing to customize programs to your language and country.
+
+Let's verify that the default locale is set to English, please type this in the Ubuntu terminal:
+
+```bash
+locale
+```
+
+If the output does not contain `LANG=en_US.UTF-8`, run the following command in a Ubuntu terminal to install the english locale:
+
+```bash
+sudo locale-gen en_US.UTF-8
+```
+
+If after, you receive a warning (`bash: warning: setlocale: LC_ALL: cannot change locale (en_US.utf-8)`) in your terminal, please do the following:
+
+<details>
+  <summary>Generate locale</summary>
+
+Please, run this lines in your terminal.
+
+```bash
+sudo update-locale LANG=en_US.UTF8
+sudo apt-get update
+sudo apt-get install language-pack-en language-pack-en-base manpages
+```
+</details>
+
 ### Zsh & Git
 
 Instead of using the default `bash` [shell](https://en.wikipedia.org/wiki/Shell_(computing)), we will use `zsh`.
@@ -524,25 +489,25 @@ In this section, we will use [GitHub CLI](https://cli.github.com/) to interact w
 
 It should already be installed on your computer from the previous commands.
 
+We will use the GitHub CLI (`gh`) to connect to GitHub using *SSH*, a protocol to log in using SSH keys instead of the well known username/password pair.
+
 First in order to **login**, copy-paste the following command in your terminal:
 
 :warning: **DO NOT edit the `email`**
 
 ```bash
-gh auth login -s 'user:email' -w
+gh auth login -s 'user:email' -w --git-protocol ssh
 ```
 
-gh will ask you few questions:
+`gh` will ask you few questions:
 
-`What is your preferred protocol for Git operations?` With the arrows, choose `SSH` and press `Enter`. SSH is a protocol to log in using SSH keys instead of the well known username/password pair.
+- `Generate a new SSH key to add to your GitHub account?` Press `Enter` to ask gh to generate the SSH keys for you.
 
-`Generate a new SSH key to add to your GitHub account?` Press `Enter` to ask gh to generate the SSH keys for you.
+  If you already have SSH keys, you will see instead `Upload your SSH public key to your GitHub account?` With the arrows, select your public key file path and press `Enter`.
 
-If you already have SSH keys, you will see instead `Upload your SSH public key to your GitHub account?` With the arrows, select your public key file path and press `Enter`.
+- `Enter a passphrase for your new SSH key (Optional)`. Type something you want and that you'll remember. It's a password to protect your private key stored on your hard drive. Then press `Enter`.
 
-`Enter a passphrase for your new SSH key (Optional)`. Type something you want and that you'll remember. It's a password to protect your private key stored on your hard drive. Then press `Enter`.
-
-`Title for your SSH key`. You can leave it at the proposed "GitHub CLI", press `Enter`.
+- `Title for your SSH key`. You can leave it at the proposed "GitHub CLI", press `Enter`.
 
 You will then get the following output:
 

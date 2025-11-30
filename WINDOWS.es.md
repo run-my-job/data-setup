@@ -348,36 +348,6 @@ Debería devolver el nombre de usuario que elegiste anteriormente.
 
 :x: Si dice `root`, **contacta a un profesor** antes de continuar.
 
-### Comprueba la configuración regional (locale)
-
-La "locale" es un mecanismo que permite adaptar los programas a su idioma y país.
-
-Comprobemos que la configuración regional por defecto es el inglés:
-
-```bash
-locale
-```
-
-Si la salida no contiene `LANG=en_US.UTF-8`, ejecute el siguiente comando en un Ubuntu terminal para instalar la locale inglesa:
-
-```bash
-sudo locale-gen en_US.UTF-8
-```
-
-Si después, recibes una advertencia (`bash: warning: setlocale: LC_ALL: cannot change locale (en_US.utf-8)`) en tu terminal, por favor haz lo siguiente:
-
-<details>
-  <summary>Generar la configuración regional<>/summary>
-
-Por favor, ejecuta estas líneas en tu terminal.
-
-```bash
-sudo update-locale LANG=en_US.UTF8
-sudo apt-get update
-sudo apt-get install language-pack-en language-pack-en-base manpages
-```
-</details>
-
 
 ## Chrome - tu navegador
 
@@ -501,7 +471,7 @@ Luego deshabilita el warning para copiar y pegar comandos entre Windows y Ubuntu
 - Agrega la siguiente línea debajo de eso:
 
 ```bash
-"multiLinePasteWarning": false,
+"warning.multiLinePaste": false,
 ```
 
 :warning: ¡No olvides la coma al final de la línea!
@@ -541,6 +511,36 @@ Aquí está la lista de las extensiones que estás instalando:
 
 
 ## Herramientas de línea de comando
+
+### Comprueba la configuración regional (locale)
+
+La "locale" es un mecanismo que permite adaptar los programas a su idioma y país.
+
+Comprobemos que la configuración regional por defecto es el inglés:
+
+```bash
+locale
+```
+
+Si la salida no contiene `LANG=en_US.UTF-8`, ejecute el siguiente comando en un Ubuntu terminal para instalar la locale inglesa:
+
+```bash
+sudo locale-gen en_US.UTF-8
+```
+
+Si después, recibes una advertencia (`bash: warning: setlocale: LC_ALL: cannot change locale (en_US.utf-8)`) en tu terminal, por favor haz lo siguiente:
+
+<details>
+  <summary>Generar la configuración regional<>/summary>
+
+Por favor, ejecuta estas líneas en tu terminal.
+
+```bash
+sudo update-locale LANG=en_US.UTF8
+sudo apt-get update
+sudo apt-get install language-pack-en language-pack-en-base manpages
+```
+</details>
 
 ### Zsh & Git
 
@@ -712,6 +712,8 @@ CLI es una abreviación de [Command-line Interface](https://en.wikipedia.org/wik
 
 En esta sección usaremos [GitHub CLI](https://cli.github.com/) para interactuar directamente con GitHub desde la terminal.
 
+Usaremos la GitHub CLI (`gh`) para conectarnos a GitHub utilizando *SSH*, un protocolo para iniciar la sesión utilizando claves SSH en lugar de la famosa pareja nombre de usuario y contraseña.
+
 Ya debería haberse instalado en tu computadora con los comandos que ejecutaste anteriormente.
 
 Lo primero que hay que hacer para **iniciar sesión** es copiar y pegar el comando siguiente en tu terminal:
@@ -719,20 +721,18 @@ Lo primero que hay que hacer para **iniciar sesión** es copiar y pegar el coman
 :warning: **NO edites el `email`**
 
 ```bash
-gh auth login -s 'user:email' -w
+gh auth login -s 'user:email' -w --git-protocol ssh
 ```
 
-gh le hará algunas preguntas:
+`gh` le hará algunas preguntas:
 
-`What is your preferred protocol for Git operations?` Con las flechas, elige `SSH` y presiona `Enter`. SSH es un protocolo para iniciar la sesión utilizando claves SSH en lugar de la famosa pareja nombre de usuario y contraseña.
+- `Generate a new SSH key to add to your GitHub account?` Presiona `Enter` para pedirle a gh que genere las claves SSH por ti.
 
-`Generate a new SSH key to add to your GitHub account?` Presiona `Enter` para pedirle a gh que genere las claves SSH por ti.
+  Si ya tienes claves SSH, verás en su lugar `Upload your SSH public key to your GitHub account?`Con las flechas, selecciona la ruta de tu archivo de clave pública y pulsa `Intro`.
 
-Si ya tienes claves SSH, verás en su lugar `Upload your SSH public key to your GitHub account?`Con las flechas, selecciona la ruta de tu archivo de clave pública y pulsa `Intro`.
+- `Enter a passphrase for your new SSH key (Optional)`. Pon algo que quieras y que recuerdes. Es una contraseña para proteger tu private key que está almacenada en tu disco duro. Luego presiona `Enter`.
 
-`Enter a passphrase for your new SSH key (Optional)`. Pon algo que quieras y que recuerdes. Es una contraseña para proteger tu private key que está almacenada en tu disco duro. Luego presiona `Enter`.
-
-`Title for your SSH key`. Puede dejarlo en la propuesta "GitHub CLI", presiona `Enter`.
+- `Title for your SSH key`. Puede dejarlo en la propuesta "GitHub CLI", presiona `Enter`.
 
 Obtendrás el siguiente resultado:
 

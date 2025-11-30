@@ -350,36 +350,6 @@ It should return the username you chose before.
 
 :x: It if says `root`, **contact a TA** before continuing!
 
-### Check the locale
-
-The locale is a mechanism allowing to customize programs to your language and country.
-
-Let's verify that the default locale is set to English, please type this in the Ubuntu terminal:
-
-```bash
-locale
-```
-
-If the output does not contain `LANG=en_US.UTF-8`, run the following command in a Ubuntu terminal to install the english locale:
-
-```bash
-sudo locale-gen en_US.UTF-8
-```
-
-If after, you receive a warning (`bash: warning: setlocale: LC_ALL: cannot change locale (en_US.utf-8)`) in your terminal, please do the following:
-
-<details>
-  <summary>Generate locale</summary>
-
-Please, run this lines in your terminal.
-
-```bash
-sudo update-locale LANG=en_US.UTF8
-sudo apt-get update
-sudo apt-get install language-pack-en language-pack-en-base manpages
-```
-</details>
-
 
 ## Chrome - your browser
 
@@ -505,7 +475,7 @@ Then, let's disable warnings for copy-pasting commands between Windows and Ubunt
 - Add the following line after it:
 
 ```bash
-"multiLinePasteWarning": false,
+"warning.multiLinePaste": false,
 ```
 
 :warning: Do not forget the comma at the end of the line!
@@ -546,6 +516,36 @@ Here is a list of the extensions you are installing:
 
 
 ## Command line tools
+
+### Check the locale
+
+The locale is a mechanism allowing to customize programs to your language and country.
+
+Let's verify that the default locale is set to English, please type this in the Ubuntu terminal:
+
+```bash
+locale
+```
+
+If the output does not contain `LANG=en_US.UTF-8`, run the following command in a Ubuntu terminal to install the english locale:
+
+```bash
+sudo locale-gen en_US.UTF-8
+```
+
+If after, you receive a warning (`bash: warning: setlocale: LC_ALL: cannot change locale (en_US.utf-8)`) in your terminal, please do the following:
+
+<details>
+  <summary>Generate locale</summary>
+
+Please, run this lines in your terminal.
+
+```bash
+sudo update-locale LANG=en_US.UTF8
+sudo apt-get update
+sudo apt-get install language-pack-en language-pack-en-base manpages
+```
+</details>
 
 ### Zsh & Git
 
@@ -758,25 +758,25 @@ In this section, we will use [GitHub CLI](https://cli.github.com/) to interact w
 
 It should already be installed on your computer from the previous commands.
 
+We will use the GitHub CLI (`gh`) to connect to GitHub using *SSH*, a protocol to log in using SSH keys instead of the well known username/password pair.
+
 First in order to **login**, copy-paste the following command in your terminal:
 
 :warning: **DO NOT edit the `email`**
 
 ```bash
-gh auth login -s 'user:email' -w
+gh auth login -s 'user:email' -w --git-protocol ssh
 ```
 
-gh will ask you few questions:
+`gh` will ask you few questions:
 
-`What is your preferred protocol for Git operations?` With the arrows, choose `SSH` and press `Enter`. SSH is a protocol to log in using SSH keys instead of the well known username/password pair.
+- `Generate a new SSH key to add to your GitHub account?` Press `Enter` to ask gh to generate the SSH keys for you.
 
-`Generate a new SSH key to add to your GitHub account?` Press `Enter` to ask gh to generate the SSH keys for you.
+  If you already have SSH keys, you will see instead `Upload your SSH public key to your GitHub account?` With the arrows, select your public key file path and press `Enter`.
 
-If you already have SSH keys, you will see instead `Upload your SSH public key to your GitHub account?` With the arrows, select your public key file path and press `Enter`.
+- `Enter a passphrase for your new SSH key (Optional)`. Type something you want and that you'll remember. It's a password to protect your private key stored on your hard drive. Then press `Enter`.
 
-`Enter a passphrase for your new SSH key (Optional)`. Type something you want and that you'll remember. It's a password to protect your private key stored on your hard drive. Then press `Enter`.
-
-`Title for your SSH key`. You can leave it at the proposed "GitHub CLI", press `Enter`.
+- `Title for your SSH key`. You can leave it at the proposed "GitHub CLI", press `Enter`.
 
 You will then get the following output:
 
