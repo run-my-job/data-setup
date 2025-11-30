@@ -1,9 +1,8 @@
 name: Build setup guides
-on:
-  push:
+on: push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: puzl-ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build
